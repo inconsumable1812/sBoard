@@ -1,0 +1,6 @@
+ignoredBuiltDependencies:
+  - core-js
+
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - esbuild
