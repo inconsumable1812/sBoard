@@ -5,6 +5,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react(), babel({presets: [reactCompilerPreset()]})],
+  base: 'sBoard',
   server: {
     open: true,
     host: true,
