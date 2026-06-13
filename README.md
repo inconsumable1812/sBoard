@@ -1,5 +1,7 @@
 # PixiJS → Skia Renderer
 
+Демо: https://inconsumable1812.github.io/sBoard/
+
 ## Описание
 
 Тестовое задание по реализации конвертации сцены PixiJS в рендеринг через Skia (CanvasKit) с последующим экспортом в PDF.
