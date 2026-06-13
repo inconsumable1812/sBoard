@@ -24,7 +24,5 @@ export function useCanvasKit() {
     };
   }, []);
 
-  console.log(canvasKit);
-
   return canvasKit;
 }

@@ -6,55 +6,45 @@ import {createDemoScene} from './scene/createDemoScene';
 import {addRandomShape} from './scene/randomShape';
 import {useCanvasKit} from './hooks/useCanvasKit';
 import {exportPdf} from './pdf/exportPdf';
+import styles from './App.module.scss';
 
 export default function App() {
   const canvasKit = useCanvasKit();
-
   const [scene, setScene] = useState(() => createDemoScene());
-
-  const [, forceUpdate] = useState(0);
+  const [skiaVersion, setSkiaVersion] = useState(0);
 
   if (!scene) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div
-      style={{
-        padding: 24,
-      }}
-    >
+    <div className={styles.app}>
       <Toolbar
         onAddShape={() => {
           addRandomShape(scene);
-
-          forceUpdate(v => v + 1);
+          setSkiaVersion(prev => prev + 1);
         }}
-        onSwitchScene={() => {
+        onClearScene={() => {
           setScene(createDemoScene());
         }}
         onExportPdf={() => {
           exportPdf(scene);
-          console.log('export pdf');
         }}
       />
 
-      <div
-        style={{
-          display: 'flex',
-          gap: 24,
-        }}
-      >
+      <div className={styles.canvasContainer}>
         <div>
           <h3>Pixi</h3>
-
           <PixiStage container={scene} />
         </div>
 
         <div>
           <h3>Skia</h3>
-
-          <SkiaPreview canvasKit={canvasKit} container={scene} />
+          <SkiaPreview
+            canvasKit={canvasKit}
+            container={scene}
+            skiaVersion={skiaVersion}
+          />
         </div>
       </div>
     </div>

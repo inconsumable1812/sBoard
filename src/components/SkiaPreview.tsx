@@ -6,42 +6,49 @@ import {renderPixiContainer} from '../renderer/pixiToSkia';
 type Props = {
   canvasKit: CanvasKit | null;
   container: PIXI.Container;
+  skiaVersion: number;
 };
 
-export const SkiaPreview = memo(({canvasKit, container}: Props) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const surfaceRef = useRef<Surface | null>(null);
-  useEffect(() => {
-    if (!canvasKit) return;
-    if (!canvasRef.current) return;
+export const SkiaPreview = memo(
+  ({canvasKit, container, skiaVersion}: Props) => {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const surfaceRef = useRef<Surface | null>(null);
+    useEffect(() => {
+      if (!canvasKit) return;
+      if (!canvasRef.current) return;
 
-    surfaceRef.current = canvasKit.MakeSWCanvasSurface(canvasRef.current);
+      surfaceRef.current = canvasKit.MakeSWCanvasSurface(canvasRef.current);
 
-    return () => {
-      surfaceRef.current?.dispose();
-    };
-  }, [canvasKit]);
+      return () => {
+        surfaceRef.current?.dispose();
+      };
+    }, [canvasKit]);
 
-  useEffect(() => {
-    if (!canvasKit) return;
+    console.log('SkiaPreview render');
 
-    const surface = surfaceRef.current;
+    useEffect(() => {
+      if (!canvasKit) return;
 
-    if (!surface) return;
+      const surface = surfaceRef.current;
 
-    renderPixiContainer(container, surface.getCanvas(), canvasKit).then(() => {
-      surface.flush();
-    });
-  }, [container, canvasKit]);
+      if (!surface) return;
 
-  return (
-    <canvas
-      ref={canvasRef}
-      width={600}
-      height={500}
-      style={{
-        border: '1px solid #444',
-      }}
-    />
-  );
-});
+      renderPixiContainer(container, surface.getCanvas(), canvasKit).then(
+        () => {
+          surface.flush();
+        }
+      );
+    }, [container, canvasKit, skiaVersion]);
+
+    return (
+      <canvas
+        ref={canvasRef}
+        width={600}
+        height={500}
+        style={{
+          border: '1px solid #444',
+        }}
+      />
+    );
+  }
+);

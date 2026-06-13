@@ -22,5 +22,12 @@ export function addRandomShape(container: PIXI.Container) {
 
   graphics.angle = Math.random() * 360;
 
+  graphics.eventMode = 'static';
+  graphics.cursor = 'pointer';
+
+  graphics.on('click', () => {
+    console.log('random shape click');
+  });
+
   container.addChild(graphics);
 }

@@ -18,9 +18,13 @@ export function createDemoScene() {
   g1.angle = 30;
 
   g1.eventMode = 'static';
+  g1.cursor = 'pointer';
 
   g1.on('pointerdown', () => {
     console.log('ellipse down');
+  });
+  g1.on('pointerup', () => {
+    console.log('ellipse up');
   });
 
   g2.beginFill(0x0000ff);
@@ -32,7 +36,11 @@ export function createDemoScene() {
   g2.scale.set(1.5, 1.7);
 
   g2.eventMode = 'static';
+  g2.cursor = 'pointer';
 
+  g2.on('pointerdown', () => {
+    console.log('rect down');
+  });
   g2.on('pointerup', () => {
     console.log('rect up');
   });

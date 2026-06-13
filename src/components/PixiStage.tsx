@@ -35,6 +35,7 @@ export function PixiStage({container}: Props) {
       ref={rootRef}
       style={{
         border: '1px solid #444',
+        height: '500px',
       }}
     />
   );

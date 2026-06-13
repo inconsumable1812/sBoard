@@ -1,23 +1,22 @@
+import {Button} from '@/shared';
+
 type Props = {
   onAddShape: () => void;
   onExportPdf: () => void;
-  onSwitchScene: () => void;
+  onClearScene: () => void;
 };
 
-export function Toolbar({onAddShape, onExportPdf, onSwitchScene}: Props) {
+export function Toolbar({onAddShape, onExportPdf, onClearScene}: Props) {
   return (
     <div
       style={{
         display: 'flex',
         gap: 12,
-        marginBottom: 20,
       }}
     >
-      <button onClick={onAddShape}>Add Shape</button>
-
-      <button onClick={onSwitchScene}>Switch Scene</button>
-
-      <button onClick={onExportPdf}>Export PDF</button>
+      <Button onClick={onAddShape}>Add Shape</Button>
+      <Button onClick={onClearScene}>Clear Scene</Button>
+      <Button onClick={onExportPdf}>Export PDF</Button>
     </div>
   );
 }
