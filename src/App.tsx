@@ -26,6 +26,7 @@ export default function App() {
         }}
         onClearScene={() => {
           setScene(createDemoScene());
+          setSkiaVersion(0);
         }}
         onExportPdf={() => {
           exportPdf(scene);
