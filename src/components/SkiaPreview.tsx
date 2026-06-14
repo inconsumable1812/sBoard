@@ -24,14 +24,15 @@ export const SkiaPreview = memo(
       };
     }, [canvasKit]);
 
-    console.log('SkiaPreview render');
-
     useEffect(() => {
       if (!canvasKit) return;
 
       const surface = surfaceRef.current;
 
       if (!surface) return;
+      const canvas = surface.getCanvas();
+
+      canvas.clear(canvasKit.WHITE);
 
       renderPixiContainer(container, surface.getCanvas(), canvasKit).then(
         () => {
